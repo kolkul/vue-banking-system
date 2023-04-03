@@ -9,14 +9,22 @@
 <script>
 import EmptyLayout from "@/layout/EmptyLayout";
 import MainLayout from "@/layout/MainLayout";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 
 export default {
-  computed: {
-    layout() {
-      console.log(this.$route.meta);
-      return (this.$route.meta.layout || "Empty") + "Layout";
-    },
+  setup() {
+    const route = useRoute();
+
+    const layout = computed(() => {
+      return (route.meta.layout || "Empty") + "Layout";
+    });
+
+    return {
+      layout,
+    };
   },
+
   components: {
     EmptyLayout,
     MainLayout,
